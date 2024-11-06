@@ -41,17 +41,35 @@ public class SLL<T> implements Phase1SLL<T>{
     */
     @Override
     public void addFirst(T v){
-        this.head = new NodeSL<T>(v, null);
+        if (this.head == null){
+            this.head = new NodeSL<T>(v, null);
+        }
+        else{
+            NodeSL<T> n = this.head;
+            this.head = new NodeSL<T>(v, n);
+        }
     }
   
     /** Converts to a string representation */
     public String toString(){
         String s = "[";
        for (NodeSL<T> n = this.head; n != null; n = n.getNext()){
-           s += String.valueOf(n.getData()) + ", ";
+            if (n.getNext() != null){
+                s += String.valueOf(n.getData()) + ", ";
+            }
+            else{
+                s += String.valueOf(n.getData());
+            }
        }
        s += "]";
        return s;
+    }
+
+    public static void main(String[] args) {
+        SLL<String> list = new SLL<>();
+        list.addFirst("A");
+        list.addFirst("B");
+        System.err.println(list);
     }
 
 
