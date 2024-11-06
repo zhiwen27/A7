@@ -21,10 +21,15 @@ public class SLL<T> implements Phase1SLL<T>{
     */
     public NodeSL<T> getTail(){
         NodeSL<T> n = this.head;
-        while(this.head.getNext() != null){
-            n = n.getNext();
+        if (n == null){
+            return null;
         }
-        return n;
+        else{
+            while(n.getNext() != null){
+                n = n.getNext();
+            }
+            return n;
+        }
     }
 
     /** 
@@ -64,14 +69,6 @@ public class SLL<T> implements Phase1SLL<T>{
        s += "]";
        return s;
     }
-
-    public static void main(String[] args) {
-        SLL<String> list = new SLL<>();
-        list.addFirst("A");
-        list.addFirst("B");
-        System.err.println(list);
-    }
-
 
     // /** 
     // *  Inserts the given item at the tail of the list
