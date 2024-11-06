@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 /**
 * Class to implement a singly linked list
 *
@@ -7,7 +5,7 @@ import org.w3c.dom.Node;
 * @version Spring 2024
 */
 
-public class SLL<T> implements Phase1SLL{
+public class SLL<T> implements Phase1SLL<T>{
     private NodeSL<T> head;
     /** 
     *  Accessor for head node
@@ -42,8 +40,8 @@ public class SLL<T> implements Phase1SLL{
     *  @param v item to insert 
     */
     @Override
-    public void addFirst(NodeSL<T> v){
-        this.head = new NodeSL<T>(v.getData(), v.getNext());
+    public void addFirst(T v){
+        this.head = new NodeSL<T>(v, null);
     }
   
     /** Converts to a string representation */
