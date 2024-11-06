@@ -20,11 +20,11 @@ public class SLL<T> implements Phase1SLL<T>{
     *  @return the tail node
     */
     public NodeSL<T> getTail(){
-        NodeSL<T> n = this.head;
-        if (n == null){
+        if (this.isEmpty()){
             return null;
         }
         else{
+            NodeSL<T> n = this.head;
             while(n.getNext() != null){
                 n = n.getNext();
             }
@@ -46,7 +46,7 @@ public class SLL<T> implements Phase1SLL<T>{
     */
     @Override
     public void addFirst(T v){
-        if (this.head == null){
+        if (this.isEmpty()){
             this.head = new NodeSL<T>(v, null);
         }
         else{
@@ -70,30 +70,68 @@ public class SLL<T> implements Phase1SLL<T>{
        return s;
     }
 
-    // /** 
-    // *  Inserts the given item at the tail of the list
-    // *  @param item to insert 
-    // */
-    // public void addLast(T v);
+    /** 
+    *  Inserts the given item at the tail of the list
+    *  @param item to insert 
+    */
+    public void addLast(T v){
+        if (this.head == null){
+            this.head = new NodeSL<T>(v, null);
+        }
+        else{
+            this.getTail().setNext(new NodeSL<T>(v, null));
+        }
+    }
 
-    // /** 
-    // *  Inserts the given item after the specified node
-    // *  @param here node to insert after
-    // *  @param v item to insert 
-    // */
-    // public void addAfter(NodeSL<T> here, T v);
+    /** 
+    *  Inserts the given item after the specified node
+    *  @param here node to insert after
+    *  @param v item to insert 
+    */
+    public void addAfter(NodeSL<T> here, T v){
+        if (here == this.getTail()){
+            here.setNext(new NodeSL<T>(v, null));
+        }
+        else{
+            NodeSL<T> next = here.getNext();
+            here.setNext(new NodeSL<T>(v, next));
+        }
+    }
 
-    // /** 
-    // *  Removes the given item from the head of the list
-    // *  @return v item removed
-    // */
-    // public T removeFirst();
+    /** 
+    *  Removes the given item from the head of the list
+    *  @return v item removed
+    */
+    public T removeFirst(){
+        if (this.isEmpty()){
+            return null;
+        }
+        else{
+            NodeSL<T> remove = this.head;
+            this.head = this.head.getNext();
+            // ❗️remove.setNext(null);
+            return remove.getData();
+        }
+    }
 
-    // /** 
-    // *  Removes the given item from the tail of the list
-    // *  @return item removed
-    // */
-    // public T removeLast();
+    /** 
+    *  Removes the given item from the tail of the list
+    *  @return item removed
+    */
+    public T removeLast(){
+        if (this.isEmpty()){
+            return null;
+        }
+        else{
+            NodeSL<T> n = this.head;
+            while (n.getNext() != this.getTail()){
+                n = n.getNext();
+            }
+            NodeSL<T> tail = this.getTail();
+            n.setNext(null);
+            return tail.getData();
+        }
+    }
 
     // /** 
     // *  Removes the node after the given position
@@ -107,5 +145,12 @@ public class SLL<T> implements Phase1SLL<T>{
     // *  @return current number of nodes
     // */
     // public int size();
+
+
+    public static void main(String[] args) {
+        SLL<String> a = new SLL<>();
+        a.addLast("A");
+        System.err.println(a);
+    }
 
 }
