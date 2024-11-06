@@ -21,7 +21,7 @@ public interface Phase1SLL<T> {
    *  Inserts the given item at the head of the list
    *  @param v item to insert 
    */
-  public void addFirst(T v);
+  public void addFirst(NodeSL<T> v);
   
   /** Converts to a string representation */
   public String toString();
