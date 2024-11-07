@@ -107,10 +107,9 @@ public class SLL<T> implements Phase1SLL<T>{
             return null;
         }
         else{
-            NodeSL<T> remove = this.head;
+            T v = this.head.getData();
             this.head = this.head.getNext();
-            // ❗️remove.setNext(null);
-            return remove.getData();
+            return v;
         }
     }
 
@@ -122,34 +121,87 @@ public class SLL<T> implements Phase1SLL<T>{
         if (this.isEmpty()){
             return null;
         }
+        else if (this.head.getNext() == null){
+            T v = this.head.getData();
+            this.head = null;
+            return v;
+        }
         else{
+            T v = this.getTail().getData();
             NodeSL<T> n = this.head;
             while (n.getNext() != this.getTail()){
                 n = n.getNext();
             }
-            NodeSL<T> tail = this.getTail();
             n.setNext(null);
-            return tail.getData();
+            return v;
         }
     }
 
-    // /** 
-    // *  Removes the node after the given position
-    // *  @param here marks position to remove after
-    // *  @return item removed
-    // */
-    // public T removeAfter(NodeSL<T> here);
+    /** 
+    *  Removes the node after the given position
+    *  @param here marks position to remove after
+    *  @return item removed
+    */
+    public T removeAfter(NodeSL<T> here){
+        if (this.isEmpty()){
+            return null;
+        }
+        else if (here == null){
+            // ❗️ what is the supposed answer?
+            T v = this.head.getData();
+            this.head = this.head.getNext();
+            return v;
+        }
+        else{
+            NodeSL<T> n = this.head;
+            while (n != here){
+                n = n.getNext();
+            }
+            if (n.getNext() == null){
+                return null;
+            }
+            else if (n.getNext().getNext() == null){
+                T v = n.getNext().getData();
+                n.setNext(null);
+                return v;
+            }
+            else{
+                NodeSL<T> next = n.getNext().getNext();
+                T v = n.getNext().getData();
+                n.setNext(next);
+                return v;
+            }
+        }
+    }
 
-    // /**
-    // *  Returns a count of the number of elements in the list
-    // *  @return current number of nodes
-    // */
-    // public int size();
+    /**
+    *  Returns a count of the number of elements in the list
+    *  @return current number of nodes
+    */
+    public int size(){
+        if (this.head == null){
+            return 0;
+        }
+        else{
+            int cnt = 1;
+            NodeSL<T> n = this.head;
+            while(n.getNext() != null){
+                cnt += 1;
+                n = n.getNext();
+            }
+            return cnt;
+        }
+    }
 
 
     public static void main(String[] args) {
         SLL<String> a = new SLL<>();
         a.addLast("A");
+        a.addLast("B");
+        a.addFirst("C");
+        a.addAfter(a.getHead().getNext(), "D");
+        System.err.println(a);
+        System.err.println(a.removeAfter(null));
         System.err.println(a);
     }
 
