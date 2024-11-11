@@ -5,7 +5,7 @@
 * @version Spring 2024
 */
 
-public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
+public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>, Phase4SLL<T>{
     private NodeSL<T> head;
 
     public SLL(){
@@ -198,7 +198,7 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     *  @return current number of nodes
     */
     public int size(){
-        if (this.head == null){
+        if (this.isEmpty()){
             return 0;
         }
         else{
@@ -219,7 +219,7 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     *  @return the copied list
     */
     public SLL<T> subseqByCopy(NodeSL<T> here, int n){
-        if (this.head == null){
+        if (this.isEmpty()){
             throw new MissingElementException();
         }
         if (this.size() < n){
@@ -247,6 +247,9 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     *  @param afterHere  marks the position in this where the new list should go
     */
     public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
+        if (this.isEmpty()){
+            throw new MissingElementException();
+        }
         SLL<T> copyList = new SLL<>(list);
         NodeSL<T> next = null;
         if (copyList.head != null){
@@ -282,31 +285,46 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     *  @return  the new list
     */
     public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
+        if (this.isEmpty()){
+            throw new MissingElementException();
+        }
         SLL<T> transfer = new SLL<>();
-        SLL<T> copy = new SLL<>(this);
-        NodeSL<T> copyAfter = copy.head;
-        while (copyAfter !=  afterHere){
-            copyAfter = copyAfter.getNext();
-        }
-        transfer.head = copyAfter.getNext();
-        NodeSL<T> n = transfer.head;
-        if (toHere != this.getTail()){
-            while (n.getNext() != toHere.getNext()){
-                n = n.getNext();
+        if (afterHere == null){
+            transfer.head = new NodeSL<T>(this.head.getData(), this.head.getNext());
+            NodeSL<T> n = transfer.head;
+            if (toHere != this.getTail()){
+                this.head = toHere.getNext();
+                while (n.getNext() != toHere.getNext()){
+                    n = n.getNext();
+                }
+                n.setNext(null);
             }
-            //n.setNext(null);
-        }
-        else {
-            while (n.getNext() != null){
-                n = n.getNext();
+            else {
+                this.head.setNext(null);
+                while (n.getNext() != null){
+                    n = n.getNext();
+                }
+                n.setNext(null);
             }
-            //n.setNext(null);
         }
-        NodeSL<T> node = this.head;
-        while(node != afterHere){
-            node = node.getNext();
+        else{
+            transfer.head = afterHere.getNext();
+            NodeSL<T> n = transfer.head;
+            if (toHere != this.getTail()){
+                afterHere.setNext(toHere.getNext());
+                while (n.getNext() != toHere.getNext()){
+                    n = n.getNext();
+                }
+                n.setNext(null);
+            }
+            else {
+                afterHere.setNext(null);
+                while (n.getNext() != null){
+                    n = n.getNext();
+                }
+                n.setNext(null);
+            }
         }
-        node.setNext(toHere.getNext());
         return transfer;
     }
 
@@ -317,6 +335,9 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     *  @param afterHere  Marks the place where the new elements are inserted
     */
     public void spliceByTransfer(SLL<T> list, NodeSL<T> afterHere){
+        if (this.isEmpty()){
+            throw new MissingElementException();
+        }
         if (afterHere == null){
             NodeSL<T> next = this.head;
             this.head = list.head;
@@ -334,16 +355,15 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     public static void main(String[] args) {
         SLL<String> a = new SLL<>();
         a.addLast("D");
-        //a.addLast("E");
+        a.addLast("E");
         a.addLast("B");
         a.addLast("A");
         a.addLast("C");
         SLL<String> b = new SLL<>();
-        b.addLast("E");
-        //b.addLast("B");
-        a.spliceByTransfer(b,null);
+        b.addLast("A");
+        b.addLast("B");
+        System.err.println(a.subseqByTransfer(null,a.head.getNext().getNext()));
         System.err.println(a);
-        System.err.println(b);
     }
 
 }

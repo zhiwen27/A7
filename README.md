@@ -24,7 +24,7 @@ What do you see as the benefits and downsides of working with linked lists inste
 
 
 What was the major challenge you faced in completing this assignment?
-Thinking through spliceByCopy process.
+It's challenging but meaningful to think through the methods spliceByCopy() and subseqByTransfer().
 
 What do you feel you learned from this assignment?
 
