@@ -211,33 +211,35 @@ public class SLLTest {
          Assert.assertTrue("A removeAfter null -> empty" + s, s.equals(""));
      }
 
-    // @Test
-    // public void test_copy_constructor() {
-    //     SLL<String> list = makeSLL(bac);
+     @Test
+     public void test_copy_constructor() {
+         SLL<String> list = makeSLL(bac);
 
-    //     String s = verifySLL(new SLL<String>(list), bac);
-    //     Assert.assertTrue("copy BAC" + s, s.equals(""));
-    //     s = verifySLL(new SLL<String>(new SLL<String>()), empty);
-    //     Assert.assertTrue("copy empty" + s, s.equals(""));
-    // }
+         String s = verifySLL(new SLL<String>(list), bac);
+         //String s = verifySLL(list.deepCopy(), bac);
+         Assert.assertTrue("copy BAC" + s, s.equals(""));
+         s = verifySLL(new SLL<String>(new SLL<String>()), empty);
+         //s = verifySLL(list.deepCopy(), empty);
+         Assert.assertTrue("copy empty" + s, s.equals(""));
+     }
 
-    // @Test
-    // public void test_subseqByCopy() {
-    //     SLL<String> list = makeSLL(bac);
-    //     SLL<String> list2 = list.subseqByCopy(list.getHead(), 2);
+     @Test
+     public void test_subseqByCopy() {
+         SLL<String> list = makeSLL(bac);
+         SLL<String> list2 = list.subseqByCopy(list.getHead(), 2);
 
-    //     String s = verifySLL(list2, ba);
-    //     Assert.assertTrue("BAC.subseqByCopy(B,2) -> BA" + s, s.equals(""));
-    //     s = verifySLL(list, bac);
-    //     Assert.assertTrue("BAC.subseqByCopy(B,2): BAC same" + s, s.equals(""));
-    //     Assert.assertTrue("Not shallow BA", list.getHead().getNext() != list2.getTail());
-    //     list2 = list.subseqByCopy(list.getHead().getNext(), 2);
-    //     s = verifySLL(list2, ac);
-    //     Assert.assertTrue("BAC.subseqByCopy(A,2) -> AC" + s, s.equals(""));
-    //     s = verifySLL(list, bac);
-    //     Assert.assertTrue("BAC.subseqByCopy(A,2): BAC same" + s, s.equals(""));
-    //     Assert.assertTrue("Not shallow AC", list.getTail() != list2.getTail());
-    // }
+         String s = verifySLL(list2, ba);
+         Assert.assertTrue("BAC.subseqByCopy(B,2) -> BA" + s, s.equals(""));
+         s = verifySLL(list, bac);
+         Assert.assertTrue("BAC.subseqByCopy(B,2): BAC same" + s, s.equals(""));
+         Assert.assertTrue("Not shallow BA", list.getHead().getNext() != list2.getTail());
+         list2 = list.subseqByCopy(list.getHead().getNext(), 2);
+         s = verifySLL(list2, ac);
+         Assert.assertTrue("BAC.subseqByCopy(A,2) -> AC" + s, s.equals(""));
+         s = verifySLL(list, bac);
+         Assert.assertTrue("BAC.subseqByCopy(A,2): BAC same" + s, s.equals(""));
+         Assert.assertTrue("Not shallow AC", list.getTail() != list2.getTail());
+     }
 
     // @Test
     // public void test_spliceByCopy() {

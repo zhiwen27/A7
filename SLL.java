@@ -5,8 +5,28 @@
 * @version Spring 2024
 */
 
-public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>, Phase4SLL<T>{
+public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     private NodeSL<T> head;
+
+    public SLL(){
+
+    }
+
+    public SLL (SLL<T> list){
+        if (list.head == null){
+            this.head = null;
+        }
+        else{
+            NodeSL<T> n = list.head;
+            this.addLast(list.head.getData());
+            while(n.getNext() != null){
+                n = n.getNext();
+                T v = n.getData();
+                this.addLast(v);
+            }
+        }
+    }
+
     /** 
     *  Accessor for head node
     *  @return the head node
@@ -199,41 +219,57 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>, Phase4SLL<T>{
     *  @param n  number of items to copy
     *  @return the copied list
     */
-    public SLL<T> subseqByCopy(NodeSL<T> here, int n);
-
-    /**
-    *  Places copy of the provided list into this after the specified node.
-    *  @param list  the list to splice in a copy of
-    *  @param afterHere  marks the position in this where the new list should go
-    */
-    public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere);
-
-    /** 
-    *  Extracts a subsequence of nodes and returns them as a new list
-    *  @param afterHere  marks the node just before the extraction
-    *  @param toHere  marks the node where the extraction ends
-    *  @return  the new list
-    */
-    public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere);
-
-    /** 
-    *  Takes the provided list and inserts its elements into this
-    *  after the specified node.  The inserted list ends up empty.
-    *  @param list  the list to splice in.  Becomes empty after the call
-    *  @param afterHere  Marks the place where the new elements are inserted
-    */
-    public void spliceByTransfer(SLL<T> list, NodeSL<T> afterHere);
-
-
-    public static void main(String[] args) {
-        SLL<String> a = new SLL<>();
-        a.addLast("A");
-        a.addLast("B");
-        a.addFirst("C");
-        a.addAfter(a.getHead().getNext(), "D");
-        System.err.println(a);
-        System.err.println(a.removeAfter(null));
-        System.err.println(a);
+    public SLL<T> subseqByCopy(NodeSL<T> here, int n){
+        SLL<T> copy = new SLL<>();
+        NodeSL<T> node = this.head;
+        while(node != here){
+            node = node.getNext();
+        }
+        copy.addLast(node.getData());
+        while(n > 1){
+            node = node.getNext();
+            copy.addLast(node.getData());
+            n -= 1;
+        }
+        return copy;
     }
+
+    // /**
+    // *  Places copy of the provided list into this after the specified node.
+    // *  @param list  the list to splice in a copy of
+    // *  @param afterHere  marks the position in this where the new list should go
+    // */
+    // public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
+    //     NodeSL<T> node = this.head;
+    //     while (node != afterHere){
+    //         node = node.getNext();
+    //     }
+    //     NodeSL<T> next = node.getNext();
+    //     NodeSL<T> nodeList = list.head;
+    //     while (nodeList.getNext() != null){
+
+    //     }
+    // }
+
+    // /** 
+    // *  Extracts a subsequence of nodes and returns them as a new list
+    // *  @param afterHere  marks the node just before the extraction
+    // *  @param toHere  marks the node where the extraction ends
+    // *  @return  the new list
+    // */
+    // public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
+    //     SLL<T> transfer = new SLL<>();
+    //     return transfer;
+    // }
+
+    // /** 
+    // *  Takes the provided list and inserts its elements into this
+    // *  after the specified node.  The inserted list ends up empty.
+    // *  @param list  the list to splice in.  Becomes empty after the call
+    // *  @param afterHere  Marks the place where the new elements are inserted
+    // */
+    // public void spliceByTransfer(SLL<T> list, NodeSL<T> afterHere){
+
+    //}
 
 }

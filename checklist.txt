@@ -10,13 +10,13 @@ your work, please indicate the status of each item
 
 ## Assignment Points:
 
-_____ 2 pt: Phase 1 methods implemented for singly linked list
+__YES___ 2 pt: Phase 1 methods implemented for singly linked list
 
-_____ 1 pt: Passes all phase 1 tests for singly linked list
+__YES___ 1 pt: Passes all phase 1 tests for singly linked list
 
-_____ 2 pt: Phase 2 methods implemented for singly linked list
+__YES___ 2 pt: Phase 2 methods implemented for singly linked list
 
-_____ 1 pt: Passes all phase 2 tests for singly linked list
+__YES___ 1 pt: Passes all phase 2 tests for singly linked list
 
 _____ 1 pts: Program throws appropriate exceptions (with informative error messages)
 
