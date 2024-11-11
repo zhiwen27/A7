@@ -358,18 +358,4 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>, Phase4SLL<T>{
         }
     }
 
-    public static void main(String[] args) {
-        SLL<String> a = new SLL<>();
-        a.addLast("D");
-        a.addLast("E");
-        a.addLast("B");
-        a.addLast("A");
-        a.addLast("C");
-        SLL<String> b = new SLL<>();
-        b.addLast("A");
-        b.addLast("B");
-        System.err.println(a.subseqByTransfer(null,a.head.getNext().getNext()));
-        System.err.println(a);
-    }
-
 }

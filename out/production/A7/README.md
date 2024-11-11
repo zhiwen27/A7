@@ -11,7 +11,7 @@ Other Collaborators (submitting related but non-identical code):
 No.
 
 Kudos/shout-out to particularly helpful members of the class or teaching staff:
-
+TAs.
 
 Any references used besides JavaDoc and course materials:
 Course Material: PPT 13-List-Operations
@@ -24,8 +24,7 @@ What do you see as the benefits and downsides of working with linked lists inste
 I think the benefits of working with linked lists would be that it would be more efficient to access the nodes.
 
 What was the major challenge you faced in completing this assignment?
-It's challenging but meaningful to think through the methods spliceByCopy() and subseqByTransfer().
+It's challenging but meaningful to think through the methods spliceByCopy() and subseqByTransfer() (to think more clearly about copy and transfer styles and implement them).
 
 What do you feel you learned from this assignment?
-
-
+I think I've learned about 
