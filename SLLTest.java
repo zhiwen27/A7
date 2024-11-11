@@ -305,31 +305,31 @@ public class SLLTest {
 
      }
 
-    // @Test
-    // public void test_spliceByTransfer() {
+     @Test
+     public void test_spliceByTransfer() {
 
-    //     SLL<String> list = makeSLL(dbac);
-    //     SLL<String> list2 = makeSLL(e);
-    //     list.spliceByTransfer(list2, list.getHead());
-    //     String s = verifySLL(list, debac);
-    //     Assert.assertTrue("DBAC.spliceByTransfer(E,D) -> DEBAC" + s, s.equals(""));
-    //     s = verifySLL(list2, empty);
-    //     Assert.assertTrue("DBAC.spliceByTransfer(E,D) empties E" + s, s.equals(""));
-    //     list = makeSLL(debac);
-    //     list2 = makeSLL(fg);
-    //     list.spliceByTransfer(list2, list.getHead().getNext().getNext().getNext().getNext());
-    //     s = verifySLL(list, debacfg);
-    //     Assert.assertTrue("DEBAC.spliceByTransfer(E,D) -> DEBACFG" + s, s.equals(""));
-    //     s = verifySLL(list2, empty);
-    //     Assert.assertTrue("DEBAC.spliceByTransfer(E,D) empties FG" + s, s.equals(""));
-    //     list = makeSLL(debacfg);
-    //     list2 = makeSLL(hi);
-    //     list.spliceByTransfer(list2, null);
-    //     s = verifySLL(list, hidebacfg);
-    //     Assert.assertTrue("DEBACFG.spliceByTransfer(HI,null) -> HIDEBACFG" + s, s.equals(""));
-    //     s = verifySLL(list2, empty);
-    //     Assert.assertTrue("DEBACFG.spliceByTransfer(HI,null) empties HI" + s, s.equals(""));
-    // }
+         SLL<String> list = makeSLL(dbac);
+         SLL<String> list2 = makeSLL(e);
+         list.spliceByTransfer(list2, list.getHead());
+         String s = verifySLL(list, debac);
+         Assert.assertTrue("DBAC.spliceByTransfer(E,D) -> DEBAC" + s, s.equals(""));
+         s = verifySLL(list2, empty);
+         Assert.assertTrue("DBAC.spliceByTransfer(E,D) empties E" + s, s.equals(""));
+         list = makeSLL(debac);
+         list2 = makeSLL(fg);
+         list.spliceByTransfer(list2, list.getHead().getNext().getNext().getNext().getNext());
+         s = verifySLL(list, debacfg);
+         Assert.assertTrue("DEBAC.spliceByTransfer(E,D) -> DEBACFG" + s, s.equals(""));
+         s = verifySLL(list2, empty);
+         Assert.assertTrue("DEBAC.spliceByTransfer(E,D) empties FG" + s, s.equals(""));
+         list = makeSLL(debacfg);
+         list2 = makeSLL(hi);
+         list.spliceByTransfer(list2, null);
+         s = verifySLL(list, hidebacfg);
+         Assert.assertTrue("DEBACFG.spliceByTransfer(HI,null) -> HIDEBACFG" + s, s.equals(""));
+         s = verifySLL(list2, empty);
+         Assert.assertTrue("DEBACFG.spliceByTransfer(HI,null) empties HI" + s, s.equals(""));
+     }
 
      @Test
      public void test_MEE1() {
