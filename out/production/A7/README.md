@@ -14,7 +14,7 @@ Kudos/shout-out to particularly helpful members of the class or teaching staff:
 
 
 Any references used besides JavaDoc and course materials:
-No.
+Course Material: PPT 13-List-Operations
 
 If you used AI, please describe how and the interaction between AI and your understanding of this assignment and specifically the related data structures and algorithms:
 

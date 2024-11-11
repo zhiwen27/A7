@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 /**
 * Class to implement a singly linked list
 *
@@ -285,12 +283,26 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     */
     public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
         SLL<T> transfer = new SLL<>();
-        transfer.head = afterHere;
+        transfer.head = afterHere.getNext();
         NodeSL<T> n = transfer.head;
-        while (n.getNext() != toHere){
-            n = n.getNext();
+        if (toHere != this.getTail()){
+            while (n.getNext() != toHere.getNext()){
+                n = n.getNext();
+            }
+            //n.setNext(null);
         }
-        n.setNext(null);
+        else {
+            while (n.getNext() != null){
+                n = n.getNext();
+            }
+            //n.setNext(null);
+        }
+        System.err.println(toHere.getNext().getData());
+        NodeSL<T> node = this.head;
+        while(node != afterHere){
+            node = node.getNext();
+        }
+        node.setNext(toHere.getNext());
         return transfer;
     }
 
@@ -306,13 +318,15 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
 
     public static void main(String[] args) {
         SLL<String> a = new SLL<>();
-        a.addLast("A");
+        a.addLast("D");
+        a.addLast("E");
         a.addLast("B");
+        a.addLast("A");
         a.addLast("C");
         SLL<String> b = new SLL<>();
         b.addLast("A");
         b.addLast("B");
-        a.spliceByCopy(b, null);
+        System.err.println(a.subseqByTransfer(a.getHead(), a.getHead().getNext().getNext()));
         System.err.println(a);
     }
 
