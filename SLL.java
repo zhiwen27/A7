@@ -250,6 +250,9 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>, Phase4SLL<T>{
         if (this.isEmpty()){
             throw new MissingElementException();
         }
+        if (list == this){
+            throw new SelfInsertException();
+        }
         SLL<T> copyList = new SLL<>(list);
         NodeSL<T> next = null;
         if (copyList.head != null){
@@ -335,6 +338,9 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>, Phase4SLL<T>{
     *  @param afterHere  Marks the place where the new elements are inserted
     */
     public void spliceByTransfer(SLL<T> list, NodeSL<T> afterHere){
+        if (list == this){
+            throw new SelfInsertException();
+        }
         if (this.isEmpty()){
             throw new MissingElementException();
         }

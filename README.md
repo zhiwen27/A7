@@ -21,7 +21,7 @@ If you used AI, please describe how and the interaction between AI and your unde
 ## Reflection
 
 What do you see as the benefits and downsides of working with linked lists instead of arrays? When might they be most useful versus limiting?
-
+I think the benefits of working with linked lists would be that it would be more efficient to access the nodes.
 
 What was the major challenge you faced in completing this assignment?
 It's challenging but meaningful to think through the methods spliceByCopy() and subseqByTransfer().

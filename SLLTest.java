@@ -360,28 +360,28 @@ public class SLLTest {
                  });
      }
 
-//     @Test
-//     public void test_SIE1() {
-//         String[] ab = { "A", "B" };
-//         SLL<String> list = makeSLL(ab);
-//
-//         Assert.assertThrows("self spliceByTransfer",
-//                 SelfInsertException.class,
-//                 () -> {
-//                     list.spliceByTransfer(list, list.getHead());
-//                 });
-//     }
+     @Test
+     public void test_SIE1() {
+         String[] ab = { "A", "B" };
+         SLL<String> list = makeSLL(ab);
 
-    // @Test
-    // public void test_SIE2() {
+         Assert.assertThrows("self spliceByTransfer",
+                 SelfInsertException.class,
+                 () -> {
+                     list.spliceByTransfer(list, list.getHead());
+                 });
+     }
 
-    //     String[] ab = { "A", "B" };
-    //     SLL<String> list = makeSLL(ab);
+     @Test
+     public void test_SIE2() {
 
-    //     Assert.assertThrows("self spliceByTransfer",
-    //             SelfInsertException.class,
-    //             () -> {
-    //                 list.spliceByCopy(list, list.getHead());
-    //             });
-    // }
+         String[] ab = { "A", "B" };
+         SLL<String> list = makeSLL(ab);
+
+         Assert.assertThrows("self spliceByTransfer",
+                 SelfInsertException.class,
+                 () -> {
+                     list.spliceByCopy(list, list.getHead());
+                 });
+     }
 }
