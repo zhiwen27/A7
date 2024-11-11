@@ -5,16 +5,16 @@ Your readme should include the following information. **Each student** needs to 
 ## Submission Details
 
 Programming Partner Name (if you are submitting identical code):
-
+No.
 
 Other Collaborators (submitting related but non-identical code):
-
+No.
 
 Kudos/shout-out to particularly helpful members of the class or teaching staff:
 
 
 Any references used besides JavaDoc and course materials:
-
+No.
 
 If you used AI, please describe how and the interaction between AI and your understanding of this assignment and specifically the related data structures and algorithms:
 
@@ -24,7 +24,7 @@ What do you see as the benefits and downsides of working with linked lists inste
 
 
 What was the major challenge you faced in completing this assignment?
-
+Thinking through spliceByCopy process.
 
 What do you feel you learned from this assignment?
 

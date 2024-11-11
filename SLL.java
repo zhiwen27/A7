@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 /**
 * Class to implement a singly linked list
 *
@@ -124,7 +126,7 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     */
     public T removeFirst(){
         if (this.isEmpty()){
-            return null;
+            throw new MissingElementException();
         }
         else{
             T v = this.head.getData();
@@ -139,7 +141,7 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     */
     public T removeLast(){
         if (this.isEmpty()){
-            return null;
+            throw new MissingElementException();
         }
         else if (this.head.getNext() == null){
             T v = this.head.getData();
@@ -164,10 +166,9 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     */
     public T removeAfter(NodeSL<T> here){
         if (this.isEmpty()){
-            return null;
+            throw new MissingElementException();
         }
         else if (here == null){
-            // ❗️ what is the supposed answer?
             T v = this.head.getData();
             this.head = this.head.getNext();
             return v;
@@ -220,47 +221,78 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     *  @return the copied list
     */
     public SLL<T> subseqByCopy(NodeSL<T> here, int n){
-        SLL<T> copy = new SLL<>();
-        NodeSL<T> node = this.head;
-        while(node != here){
-            node = node.getNext();
+        if (this.head == null){
+            throw new MissingElementException();
         }
-        copy.addLast(node.getData());
-        while(n > 1){
-            node = node.getNext();
+        if (this.size() < n){
+            throw new MissingElementException();
+        }
+        else{
+            SLL<T> copy = new SLL<>();
+            NodeSL<T> node = this.head;
+            while(node != here){
+                node = node.getNext();
+            }
             copy.addLast(node.getData());
-            n -= 1;
+            while(n > 1){
+                node = node.getNext();
+                copy.addLast(node.getData());
+                n -= 1;
+            }
+            return copy;
         }
-        return copy;
     }
 
-    // /**
-    // *  Places copy of the provided list into this after the specified node.
-    // *  @param list  the list to splice in a copy of
-    // *  @param afterHere  marks the position in this where the new list should go
-    // */
-    // public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
-    //     NodeSL<T> node = this.head;
-    //     while (node != afterHere){
-    //         node = node.getNext();
-    //     }
-    //     NodeSL<T> next = node.getNext();
-    //     NodeSL<T> nodeList = list.head;
-    //     while (nodeList.getNext() != null){
+    /**
+    *  Places copy of the provided list into this after the specified node.
+    *  @param list  the list to splice in a copy of
+    *  @param afterHere  marks the position in this where the new list should go
+    */
+    public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
+        SLL<T> copyList = new SLL<>(list);
+        NodeSL<T> next = null;
+        if (copyList.head != null){
+            if (afterHere == null){
+                next = this.head;
+                this.head = new NodeSL<T>(copyList.head.getData(), null);
+                NodeSL<T> node = this.head;
+                NodeSL<T> n = copyList.head;
+                for (n = n.getNext(); n != null; n = n.getNext()) {
+                    node.setNext(n);
+                    node = node.getNext();
+                }
+                node.setNext(next);
+            }
+            else{
+                next = afterHere.getNext();
+                afterHere.setNext(new NodeSL<T>(copyList.head.getData(), null));
+                afterHere = afterHere.getNext();
+                NodeSL<T> n = copyList.head;
+                for (n = n.getNext(); n != null; n = n.getNext()) {
+                    afterHere.setNext(n);;
+                    afterHere = afterHere.getNext();
+                }
+                afterHere.setNext(next);
+            }
+        }
+    }
 
-    //     }
-    // }
-
-    // /** 
-    // *  Extracts a subsequence of nodes and returns them as a new list
-    // *  @param afterHere  marks the node just before the extraction
-    // *  @param toHere  marks the node where the extraction ends
-    // *  @return  the new list
-    // */
-    // public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
-    //     SLL<T> transfer = new SLL<>();
-    //     return transfer;
-    // }
+    /** 
+    *  Extracts a subsequence of nodes and returns them as a new list
+    *  @param afterHere  marks the node just before the extraction
+    *  @param toHere  marks the node where the extraction ends
+    *  @return  the new list
+    */
+    public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
+        SLL<T> transfer = new SLL<>();
+        transfer.head = afterHere;
+        NodeSL<T> n = transfer.head;
+        while (n.getNext() != toHere){
+            n = n.getNext();
+        }
+        n.setNext(null);
+        return transfer;
+    }
 
     // /** 
     // *  Takes the provided list and inserts its elements into this
@@ -271,5 +303,17 @@ public class SLL<T> implements Phase1SLL<T>, Phase2SLL<T>{
     // public void spliceByTransfer(SLL<T> list, NodeSL<T> afterHere){
 
     //}
+
+    public static void main(String[] args) {
+        SLL<String> a = new SLL<>();
+        a.addLast("A");
+        a.addLast("B");
+        a.addLast("C");
+        SLL<String> b = new SLL<>();
+        b.addLast("A");
+        b.addLast("B");
+        a.spliceByCopy(b, null);
+        System.err.println(a);
+    }
 
 }
